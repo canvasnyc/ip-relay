@@ -1,0 +1,14 @@
+{
+  "message": "Sample modification. [bug: 100 status: resolved] [bug: 101]",
+  "changed_files": [
+    ["README","edit"],
+    ["test/vimrc","edit"]
+  ],
+  "time": "2008/12/25 11:54:22 +0000",
+  "author": "john",
+  "author_full_name": "John Smith",
+  "author_email": "daffy@wildbit.com",
+  "changeset_url": "https://account.beanstalkapp.com/repository/changesets/1",
+  "revision": 2,
+  "changed_dirs": []
+}

@@ -2,3 +2,4 @@ Capfile
 config.ru
 /config/*.rb
 /config/*/*.rb
+*.log

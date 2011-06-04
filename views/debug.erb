@@ -1,0 +1,38 @@
+<title>iP Relay</title>
+
+<style>
+  body { font-family: helvetica, arial, sans serif; font-size: 13px; background: #ececec; }
+  h1, dl { margin-bottom: 35px; }
+  dt { float: left; font-weight: bold; margin-right: 10px; text-align: right; width: 100px; }
+  dd { margin: 0 0 0 10px; }
+  textarea { width: 40%; height: 25%; padding: 5px; }
+</style>
+
+<h1>iP Relay</h1>
+
+<% revision = File.join(settings.root, 'REVISION') %>
+
+<h2>Currently deployed</h2>
+<dl>
+  <dt>commit</dt>
+  <dd><%= File.read(revision) rescue '???' %></dd>
+  <dt>deployed</dt>
+  <dd><%= File.stat(revision).mtime rescue '???' %></dd>
+</dl>
+
+<h2>Sinatra</h2>
+<dl>
+  <dt>environment</dt>
+  <dd><%= settings.environment %></dd>
+  <dt>hostname</dt>
+  <dd><%= Socket.gethostname %></dd>
+</dl>
+
+
+<br><i>copy & paste</i><br>
+<textarea>
+     commit: <%= File.read(revision).strip rescue '???' %>
+   deployed: <%= File.stat(revision).mtime rescue '???' %>
+environment: <%= settings.environment %>
+   hostname: <%= Socket.gethostname %>
+</textarea>

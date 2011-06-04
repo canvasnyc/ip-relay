@@ -65,7 +65,7 @@ class TestBeanstalkIntegration < Test::Unit::TestCase
 
   def test_payload_too_large
     payload = File.read('examples/beanstalk/payload_too_large.json')
-    post '/beanstalk/commit', params = {:payload => payload}
+    post '/beanstalk/payload', params = {:payload => payload}
     assert last_response.ok?
   end
 

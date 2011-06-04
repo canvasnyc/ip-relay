@@ -1,5 +1,5 @@
 {
-  "message": "Sample modification. [bug: 100 status: resolved]",
+  "message": "Sample modification. [bug: 100, status: resolved]",
   "changed_files": [
     ["README","edit"],
     ["test/vimrc","edit"]

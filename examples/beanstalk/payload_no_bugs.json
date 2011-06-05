@@ -1,53 +1,53 @@
 {
-    "before": "7295fb96e74d1b54ba65cb003dce4da4193b5d29", 
-    "after": "4ec8a1fcb42d278b60b33baa403a85c2e6706b5f", 
-    "push_is_too_large": false, 
+    "before": "7295fb96e74d1b54ba65cb003dce4da4193b5d29",
+    "after": "4ec8a1fcb42d278b60b33baa403a85c2e6706b5f",
+    "push_is_too_large": false,
     "ref": "refs/heads/development",
     "branch": "development",
     "uri": "git@wildbit.beanstalkapp.com:/beanstalk.git",
     "repository": {
-        "name": "beanstalk", 
+        "name": "beanstalk",
         "owner": {
-          "email": "sdmitry@gmail.com", 
+          "email": "sdmitry@gmail.com",
           "name": "Dima Sabanin"
-        }, 
-        "private": true, 
+        },
+        "private": true,
         "url": "http://wildbit.beanstalkapp.com/beanstalk"
-    }, 
+    },
     "commits": [
       {
         "4ec8a1fcb42d278b60b33baa403a85c2e6706b5f": {
           "author": {
-            "email": "sdmitry@gmail.com", 
+            "email": "sdmitry@gmail.com",
             "name": "Dima Sabanin"
-          }, 
-          "changed_dirs": [], 
+          },
+          "changed_dirs": [],
           "changed_files": [
             [
-              "db/schema.rb", 
+              "db/schema.rb",
               "edit"
             ]
-          ], 
-          "url": "http://wildbit.beanstalkapp.com/beanstalk/changesets/4ec8a1fcb42d278b60b33baa403a85c2e6706b5f", 
-          "id": "4ec8a1fcb42d278b60b33baa403a85c2e6706b5f", 
-          "message": "Updated schema", 
+          ],
+          "url": "http://wildbit.beanstalkapp.com/beanstalk/changesets/4ec8a1fcb42d278b60b33baa403a85c2e6706b5f",
+          "id": "4ec8a1fcb42d278b60b33baa403a85c2e6706b5f",
+          "message": "Updated schema",
           "timestamp": "2010-04-14T17:54:16+08:00"
-        }, 
+        },
         "7295fb96e74d1b54ba65cb003dce4da4193b5d29": {
           "author": {
-            "email": "sdmitry@gmail.com", 
+            "email": "sdmitry@gmail.com",
             "name": "Dima Sabanin"
-          }, 
-          "changed_dirs": [], 
+          },
+          "changed_dirs": [],
           "changed_files": [
             [
-              "lib/hooks/git_adapter.rb", 
+              "lib/hooks/git_adapter.rb",
               "edit"
             ]
-          ], 
-          "url": "http://wildbit.beanstalkapp.com/beanstalk/changesets/7295fb96e74d1b54ba65cb003dce4da4193b5d29", 
-          "id": "7295fb96e74d1b54ba65cb003dce4da4193b5d29", 
-          "message": "Fixing 'Broken pipe' error", 
+          ],
+          "url": "http://wildbit.beanstalkapp.com/beanstalk/changesets/7295fb96e74d1b54ba65cb003dce4da4193b5d29",
+          "id": "7295fb96e74d1b54ba65cb003dce4da4193b5d29",
+          "message": "Fixing 'Broken pipe' error",
           "timestamp": "2010-04-15T17:54:16+08:00"
         }
       }

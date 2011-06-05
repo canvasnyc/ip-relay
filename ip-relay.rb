@@ -9,6 +9,8 @@ require 'lib/Beanstalk'
 
 # Destinations
 require 'lib/Bugzilla'
+require 'lib/Intervals'
+require 'lib/Campfire'
 
 if settings.basic_auth
   use Rack::Auth::Basic, "iP Relay" do |username, password|

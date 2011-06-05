@@ -10,8 +10,7 @@ post '/beanstalk/commit' do
       "Comment: #{commit["message"]}\n\n" +
       "Changeset URL: #{commit["changeset_url"]}"
   end
-  execute commands
-  respond :commands => commands
+  respond execute commands
 end
 
 post '/beanstalk/payload' do
@@ -19,7 +18,7 @@ post '/beanstalk/payload' do
   commands = []
   unless payload["push_is_too_large"]
     payload["commits"].first.each do |id, commit|
-      commands << interpret(commit["message"]).each do |command|
+      commands += interpret(commit["message"]).each do |command|
         command[:origin] = "Beanstalk"
         command[:commit] = commit
         command[:comment] =
@@ -30,8 +29,7 @@ post '/beanstalk/payload' do
       end
     end
   end
-  execute commands
-  respond :commands => commands
+  respond execute commands
 end
 
 class Beanstalk

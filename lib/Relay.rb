@@ -31,7 +31,14 @@ module Relay
 
   def execute(commands)
     commands.each do |command|
-      Kernel.const_get(command[:destination]).send :execute, command unless command[:destination].nil?
+      if command.empty?
+        puts "Skipping this command, it's empty"
+      elsif command[:destination].nil?
+        puts "Skipping this command, there's no destination"
+      else
+        puts "Sending command to: #{command[:destination]}"
+        command[:response] = Kernel.const_get(command[:destination]).send :execute, command
+      end
     end
   end
 

@@ -1,0 +1,29 @@
+# Per-environment configurations are possible by setting up this folder and file structure:
+#
+# /config/environment.rb (shared between all environments)
+# /config/environments/development.rb
+# /config/environments/test.rb
+# /config/environments/production.rb
+# /config/environments/etc.rb
+
+# Enable or disable HTTP basic authentication
+disable :basic_auth
+# enable :basic_auth
+# set :basic_auth_credentials, ['any_username_here', 'any_password_here']
+
+set :intervals, {
+  :url => 'https://api.myintervals.com',
+  :username => 'your_token_here', # Get an 'API Access Token' here: https://your_domain_here.projectaccount.com/account/api/
+  :password => 'x', # Password is required, but can be anything (can be left as 'x')
+}
+
+set :campfire, {
+  :subdomain => 'your_domain_here',
+  :token => 'your_token_here' # Get an 'API authentication token' here: https://your_domain_here.campfirenow.com/member/edit
+}
+
+set :bugzilla, {
+  :url => 'http://bugzilla.your_domain_here.com/xmlrpc.cgi',
+  :login => 'your_login_here',
+  :password => 'your_password_here',
+}

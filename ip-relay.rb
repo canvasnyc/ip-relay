@@ -1,6 +1,8 @@
+require 'rubygems'
+require 'sinatra'
+require 'sinatra/config'
 require 'pp'
 require 'json'
-require 'sinatra/config'
 
 require 'lib/Relay'; include Relay
 

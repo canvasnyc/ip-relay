@@ -11,6 +11,9 @@ disable :basic_auth
 # enable :basic_auth
 # set :basic_auth_credentials, ['any_username_here', 'any_password_here']
 
+# Enable or disable logging to disk (/log/ip-relay.log)
+disable :logging_to_disk
+
 set :intervals, {
   :url => 'https://api.myintervals.com',
   :username => 'your_token_here', # Get an 'API Access Token' here: https://your_domain_here.projectaccount.com/account/api/

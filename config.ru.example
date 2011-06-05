@@ -1,0 +1,30 @@
+ENV['GEM_HOME'] ||= `gem env path`.strip.split(':').first
+ENV['GEM_PATH'] ||= `gem env path`.strip
+Gem.clear_paths
+
+# The above is a DreamHost-specific hack. Source:
+# http://nathanhoad.net/no-such-file-to-load-sinatra-on-dreamhost
+#
+# AND NOW A BIT ABOUT THE PROBLEM
+#
+# The problem (for me, anyway) seemed to happen after Passenger had been
+# napping. Upon waking, Passenger had temporary amnesia and forgot how to
+# load gems on the first request. Refreshing the app would work the second
+# time but that's hardly ideal.
+
+# The above solution appears to give Passenger a helping hand as it goes
+# into wake up mode.
+
+require 'rubygems'
+require 'sinatra'
+require 'sinatra/config'
+
+if settings.logging_to_disk
+  log = File.new("log/ip-relay.log", "a")
+  STDOUT.reopen(log)
+  STDERR.reopen(log)
+end
+
+require 'ip-relay'
+
+run Sinatra::Application

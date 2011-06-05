@@ -1,0 +1,39 @@
+# The following is only known to work on DreamHost. Use as-is,
+# reconfigure, etc.!
+
+load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+
+default_run_options[:pty] = true
+
+set :user, 'your_username_here'
+set :domain, 'your_domain_here'
+
+set :repository,  "git@github.com:toddmazierski/ip-relay.git"
+set :deploy_to, "/home/#{user}/#{domain}"
+
+set :deploy_via, :remote_cache
+set :scm, 'git'
+set :branch, 'master'
+set :git_shallow_clone, 1
+set :scm_verbose, true
+set :use_sudo, false
+
+server domain, :app, :web
+
+# The purpose of "deploy:copy_config" is to keep passwords out of source
+# control. Files copied to the "shared_path" are preserved between
+# deployments, and are re-copied to the "release_path" after each
+# deployment.
+
+after "deploy:update_code", "deploy:copy_config"
+
+namespace :deploy do
+  task :copy_config do
+    run "cp #{shared_path}/config/config.ru #{release_path}"
+    run "cp --recursive #{shared_path}/config/config/ #{release_path}"
+  end
+
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end

@@ -28,9 +28,8 @@ post '/beanstalk/payload' do
           "Changeset URL: #{commit["url"][0..-33]}"
       end
     end
+  else
+    puts "Push is too large"
   end
   respond execute commands
-end
-
-class Beanstalk
 end

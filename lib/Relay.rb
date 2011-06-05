@@ -2,15 +2,15 @@ module Relay
 
   @@destinations = {}
 
-  def create_destination(key, class_name)
-    @@destinations[key] = class_name
+  def create_destination(key, object)
+    @@destinations[key] = object
   end
 
   def respond(response)
     # Output to STDOUT, and thereby the log
     pp response
     # Output to the HTML response, primarily for testing purposes
-    content_type 'text/json'
+    content_type 'application/json'
     response.to_json
   end
 
@@ -30,14 +30,25 @@ module Relay
   end
 
   def execute(commands)
-    commands.each do |command|
-      if command.empty?
-        puts "Skipping this command, it's empty"
-      elsif command[:destination].nil?
-        puts "Skipping this command, there's no destination"
-      else
-        puts "Sending command to: #{command[:destination]}"
-        command[:response] = Kernel.const_get(command[:destination]).send :execute, command
+    if commands.nil? || commands.empty?
+      puts "No commands detected to execute"
+    else
+      commands.each do |command|
+        if command.empty?
+          puts "Skipping this command, it's empty"
+        elsif command[:destination].nil?
+          puts "Skipping this command, there's no destination"
+        else
+          puts "Sending command to: #{command[:destination]}"
+          object = Kernel.const_get(command[:destination])
+          begin
+            instance = object.new
+            command[:response] = instance.send :execute, command
+          rescue Exception => e
+            puts "An exception occurred: #{e}"
+            pp command
+          end
+        end
       end
     end
   end

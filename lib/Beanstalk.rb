@@ -23,7 +23,7 @@ post '/beanstalk/payload' do
   payload = JSON.parse params[:payload]
   commands = []
   unless payload["push_is_too_large"]
-    payload["commits"].first.each do |id, commit|
+    payload["commits"].each do |commit|
       commands += interpret(commit["message"]).each do |command|
         command[:origin] = "Beanstalk"
         command[:commit] = commit

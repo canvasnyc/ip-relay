@@ -7,8 +7,6 @@ module Relay
   end
 
   def respond(response)
-    # Output to STDOUT, and thereby the log
-    pp response
     # Output to the HTML response, primarily for testing purposes
     content_type 'application/json'
     response.to_json
@@ -34,6 +32,7 @@ module Relay
       puts "No commands detected to execute"
     else
       commands.each do |command|
+        puts "-" * 79
         if command.empty?
           puts "Skipping this command, it's empty"
         elsif command[:destination].nil?
@@ -42,12 +41,13 @@ module Relay
           puts "Sending command to: #{command[:destination]}"
           object = Kernel.const_get(command[:destination])
           begin
-            instance = object.new
-            command[:response] = instance.send :execute, command
+            command[:response] = object.send :execute, command
           rescue Exception => e
+            puts "*" * 79
             puts "An exception occurred: #{e}"
-            pp command
+            puts "*" * 79
           end
+        pp command
         end
       end
     end

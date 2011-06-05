@@ -1,4 +1,7 @@
 post '/beanstalk/commit' do
+  puts "=" * 79
+  puts "Beanstalk \"commit\" received at #{Time.now}"
+  puts request.body.read
   commit = JSON.parse params[:commit]
   commands = interpret commit["message"]
   commands.each do |command|
@@ -14,6 +17,9 @@ post '/beanstalk/commit' do
 end
 
 post '/beanstalk/payload' do
+  puts "=" * 79
+  puts "Beanstalk \"payload\" received at #{Time.now}"
+  puts request.body.read
   payload = JSON.parse params[:payload]
   commands = []
   unless payload["push_is_too_large"]
@@ -29,7 +35,9 @@ post '/beanstalk/payload' do
       end
     end
   else
+    puts "*" * 79
     puts "Push is too large"
+    puts "*" * 79
   end
   respond execute commands
 end

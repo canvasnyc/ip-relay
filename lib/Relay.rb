@@ -21,7 +21,10 @@ module Relay
         param = text.split(':')
         key = param[0].to_sym; value = param[1]
         command[key] = value
-        command[:destination] = @@destinations[key] if @@destinations.include? key
+        if @@destinations.include? key
+          command[:actionable] = key
+          command[:destination] = @@destinations[key]
+        end
       end
       command
     end

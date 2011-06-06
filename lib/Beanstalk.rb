@@ -9,7 +9,7 @@ post '/beanstalk/commit' do
     command[:commit] = commit
     command[:comment] =
       "A commit has been made (r#{commit["revision"]}) by " +
-      "#{commit["author_full_name"]} that references this bug.\n\n" +
+      "#{commit["author_full_name"]} that references this #{command[:actionable]}.\n\n" +
       "Comment: #{commit["message"]}\n\n" +
       "Changeset URL: #{commit["changeset_url"]}"
   end
@@ -29,7 +29,7 @@ post '/beanstalk/payload' do
         command[:commit] = commit
         command[:comment] =
           "A commit has been made (#{commit['id'][0..7]}) by " +
-          "#{commit["author"]["name"]} that references this bug.\n\n" +
+          "#{commit["author"]["name"]} that references this #{command[:actionable]}.\n\n" +
           "Comment: #{commit["message"]}\n\n" +
           "Changeset URL: #{commit["url"][0..-33]}"
       end

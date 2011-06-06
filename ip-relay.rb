@@ -23,3 +23,7 @@ end
 get '/debug' do
   erb :debug
 end
+
+get '/log/:lines' do
+  `tail -n #{params[:lines]} log/ip-relay.log`
+end

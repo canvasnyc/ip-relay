@@ -8,6 +8,7 @@ require 'lib/Relay'; include Relay
 
 # Origins
 require 'lib/Beanstalk'
+require 'lib/Hoptoad'
 
 # Destinations
 require 'lib/Bugzilla'

@@ -8,6 +8,8 @@ class Bugzilla
     @@server = XMLRPC::Client.new2 settings.bugzilla[:url]
     if command[:status].nil?
       add_comment command[:bug], command[:comment]
+    elsif command[:status].upcase == "NEW"
+      create_bug command[:product], command[:component], command[:summary], command[:version], command[:optional_args]
     else
       update_bug command[:bug], command[:comment], command[:status]
     end
@@ -25,14 +27,25 @@ class Bugzilla
     @@server.call "Bug.add_comment", args.merge(auth_args)
   end
 
-  def self.update_bug(id, comment, status)
+  def self.update_bug(id, comment, status, resolution = 'FIXED')
     args = {
       :ids => id,
       :comment => {:body => comment},
       :status => status.upcase,
-      :resolution => 'FIXED'
+      :resolution => resolution.upcase
     }
     @@server.call "Bug.update", args.merge(auth_args)
+  end
+
+  def self.create_bug(product, component, summary, version, optional_args = nil)
+    args = {
+      :product => product,
+      :component => component,
+      :summary => summary,
+      :version => version
+    }
+    args.merge! optional_args unless optional_args.nil?
+    @@server.call "Bug.create", args.merge(auth_args)
   end
 
 end

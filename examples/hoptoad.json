@@ -1,0 +1,10 @@
+{
+    "error": {
+        "account_name": "spacely_space_sprockets",
+        "url": "http://spacely_space_sprockets.hoptoadapp.com/errors/7204305",
+        "message": "ZeroDivisionError: divided by 0",
+        "env_name": "Demo",
+        "app_name": "Flying Car"
+    },
+    "message": "[HOPTOAD] App Flying Car (Demo) errored: http://spacely_space_sprockets.hoptoadapp.com/errors/7204305 -- ZeroDivisionError: divided by 0"
+}

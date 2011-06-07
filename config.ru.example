@@ -15,16 +15,5 @@ Gem.clear_paths
 # The above solution appears to give Passenger a helping hand as it goes
 # into wake up mode.
 
-require 'rubygems'
-require 'sinatra'
-require 'sinatra/config'
-
-if settings.logging_to_disk
-  log = File.new("log/ip-relay.log", "a")
-  STDOUT.reopen(log)
-  STDERR.reopen(log)
-end
-
-require 'ip-relay'
-
+require File.expand_path('./ip-relay.rb', File.dirname(__FILE__))
 run Sinatra::Application

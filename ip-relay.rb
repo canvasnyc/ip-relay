@@ -4,16 +4,16 @@ require 'sinatra/config'
 require 'pp'
 require 'json'
 
-require 'lib/Relay'; include Relay
+require File.expand_path('./lib/Relay.rb', File.dirname(__FILE__)); include Relay
 
 # Origins
-require 'lib/Beanstalk'
-require 'lib/Hoptoad'
+require File.expand_path('./lib/Beanstalk.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/Hoptoad.rb', File.dirname(__FILE__))
 
 # Destinations
-require 'lib/Bugzilla'
-require 'lib/Intervals'
-require 'lib/Campfire'
+require File.expand_path('./lib/Bugzilla.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/Intervals.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/Campfire.rb', File.dirname(__FILE__))
 
 if settings.basic_auth
   use Rack::Auth::Basic, "iP Relay" do |username, password|

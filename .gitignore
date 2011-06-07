@@ -2,4 +2,5 @@ Capfile
 config.ru
 /config/*.rb
 /config/*/*.rb
+.bundle
 *.log

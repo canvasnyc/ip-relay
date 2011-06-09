@@ -31,7 +31,7 @@ post '/beanstalk/payload' do
           "A commit has been made (#{commit['id'][0..7]}) by " +
           "#{commit["author"]["name"]} that references this #{command[:actionable]}.\n\n" +
           "Comment: #{commit["message"]}\n\n" +
-          "Changeset URL: #{commit["url"][0..-33]}"
+          "Changeset URL: #{commit["url"]}"
       end
     end
   else

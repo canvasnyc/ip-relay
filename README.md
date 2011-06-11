@@ -4,7 +4,7 @@ iP Relay is a message relaying service built for the use of the engineering, tes
 
 ## Message Origins ##
 
-The only message "origin" supported currently is [Beanstalk](http://beanstalkapp.com/).
+### [Beanstalk](http://beanstalkapp.com/) ###
 
 To configure:
 
@@ -33,18 +33,34 @@ Commit message examples:
   * Adds a comment to Bugzilla bug 100
   * Changes the status of Bugzilla bug 100 to "RESOLVED"
   * Adds a comment to Bugzilla bug 101
+  
+### [Hoptoad](http://www.hoptoadapp.com/) ###
+
+Hoptoad errors can be automatically filed as bugs in Bugzilla.
+
+To configure:
+
+  1. Install [hoptoad-webhooks](https://github.com/halorgium/hoptoad-webhooks) by @halorgium
+  2. Configure the hoptoad-webhooks `hook_url` to be: http://ip-relay.your_domain_here.com/hoptoad/error
+  3. Match the project names between Hoptoad and Bugzilla (there is currently no mapping capability available)
+  4. For each project in Bugzilla, create a "Hoptoad Errors" component — this will be the "inbox" for new Hoptoad error reports
 
 ## Message Destinations ##
 
 The following message "destinations" are supported:
 
-[Bugzilla](http://www.bugzilla.org/)
+### [Bugzilla](http://www.bugzilla.org/) ###
+
 Example: `[bug: 100, status: resolved] [bug: 101]`
+
 Note: Status value is automatically upper-cased (ex. "RESOLVED").
 
-[Intervals](http://www.myintervals.com/)
+### [Intervals](http://www.myintervals.com/) ###
+
 Example: `[task: 3907]`
 
-[Campfire](http://campfirenow.com/)
+### [Campfire](http://campfirenow.com/) ###
+
 Example: `[chat:shenanigans]`
+
 Note: Room name is automatically capitalized (ex. "Shenanigans").

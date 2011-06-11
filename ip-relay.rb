@@ -1,8 +1,16 @@
-require 'rubygems'
-require 'sinatra'
-require 'sinatra/config'
-require 'pp'
-require 'json'
+require "rubygems"
+require "pp"
+require "bundler/setup"
+Bundler.require
+
+# start logging after third-party dependencies are loaded
+# but before lib dependencies so that we can catch application
+# errors in production
+if settings.logging_to_disk
+  log = File.new("log/ip-relay.log", "a")
+  STDOUT.reopen(log)
+  STDERR.reopen(log)
+end
 
 require File.expand_path('./lib/Relay.rb', File.dirname(__FILE__)); include Relay
 

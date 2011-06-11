@@ -1,5 +1,3 @@
-require 'httparty'
-
 create_destination :task, 'Intervals'
 
 class Intervals

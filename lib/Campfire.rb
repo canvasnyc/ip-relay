@@ -1,5 +1,3 @@
-require 'tinder'
-
 create_destination :chat, 'Campfire'
 
 class Campfire

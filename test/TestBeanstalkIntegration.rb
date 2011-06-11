@@ -1,7 +1,6 @@
-require 'rubygems'
 require File.expand_path('../ip-relay.rb', File.dirname(__FILE__))
+Bundler.require(:test)
 require 'test/unit'
-require 'rack/test'
 
 ENV['RACK_ENV'] = 'test'
 

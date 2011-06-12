@@ -23,6 +23,12 @@ class TestBeanstalkIntegration < Test::Unit::TestCase
     assert last_response.ok?
   end
 
+  def test_commit_1_bug_chat
+    commit = File.read(File.expand_path('../examples/beanstalk/commit_1_bug_chat.json', File.dirname(__FILE__)))
+    post '/beanstalk/commit', params = {:commit => commit}
+    assert last_response.ok?
+  end
+
   def test_commit_1_task
     commit = File.read(File.expand_path('../examples/beanstalk/commit_1_task.json', File.dirname(__FILE__)))
     post '/beanstalk/commit', params = {:commit => commit}

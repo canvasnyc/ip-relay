@@ -4,18 +4,21 @@ post '/hoptoad/error' do
   body = request.body.read
   puts body
   error = JSON.parse body
+
   command = {
     :destination => 'Bugzilla',
-    :status => 'NEW',
-    :product => error["error"]["app_name"],
-    :component => 'Hoptoad Errors',
-    :summary => error["error"]["message"],
-    :version => 'unspecified'
+    :action => :create_bug,
+    :actionable => 'bug',
+    :args => {
+      :product => error["error"]["app_name"],
+      :component => 'Hoptoad Errors',
+      :summary => error["error"]["message"],
+      :version => 'unspecified',
+      :url => error["error"]["url"],
+      :description => error["message"]
+    }
   }
-  command[:optional_args] = {
-    :url => error["error"]["url"],
-    :description => error["message"]
-  }
+
   commands = [command]
   respond execute commands
 end

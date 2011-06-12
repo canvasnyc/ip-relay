@@ -12,7 +12,10 @@ if settings.logging_to_disk
   STDERR.reopen(log)
 end
 
-require File.expand_path('./lib/Relay.rb', File.dirname(__FILE__)); include Relay
+require File.expand_path('./lib/Relay.rb', File.dirname(__FILE__))
+include Relay
+require File.expand_path('./lib/Interpreter.rb', File.dirname(__FILE__))
+include Interpreter
 
 # Origins
 require File.expand_path('./lib/Beanstalk.rb', File.dirname(__FILE__))

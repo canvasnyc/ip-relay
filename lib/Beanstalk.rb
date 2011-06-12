@@ -5,13 +5,14 @@ post '/beanstalk/commit' do
   commit = JSON.parse params[:commit]
   commands = interpret commit["message"]
   commands.each do |command|
-    command[:origin] = "Beanstalk"
-    command[:commit] = commit
-    command[:comment] =
-      "A commit has been made (r#{commit["revision"]}) by " +
-      "#{commit["author_full_name"]} that references this #{command[:actionable]}.\n\n" +
-      "Comment: #{commit["message"]}\n\n" +
-      "Changeset URL: #{commit["changeset_url"]}"
+    command[:origin] = {
+      :name => "Beanstalk",
+      :commit => commit
+    }
+    command[:args][:comment] =
+      "#{commit["author_full_name"]} made a commit (r#{commit["revision"]}) " +
+      "that mentioned this #{command[:actionable]}.\n\n" +
+      "#{commit["message"]}\n\n#{commit["changeset_url"]}"
   end
   respond execute commands
 end
@@ -25,13 +26,14 @@ post '/beanstalk/payload' do
   unless payload["push_is_too_large"]
     payload["commits"].each do |commit|
       commands += interpret(commit["message"]).each do |command|
-        command[:origin] = "Beanstalk"
-        command[:commit] = commit
-        command[:comment] =
-          "A commit has been made (#{commit['id'][0..7]}) by " +
-          "#{commit["author"]["name"]} that references this #{command[:actionable]}.\n\n" +
-          "Comment: #{commit["message"]}\n\n" +
-          "Changeset URL: #{commit["url"]}"
+        command[:origin] = {
+          :name => "Beanstalk",
+          :commit => commit
+        }
+        command[:args][:comment] =
+          "#{commit["author"]["name"]} made a commit (#{commit['id'][0..7]}) " +
+          "to #{payload["repository"]["name"]} that mentioned this #{command[:actionable]}.\n\n" +
+          "#{commit["message"]}\n\n#{commit["url"]}"
       end
     end
   else

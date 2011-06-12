@@ -1,5 +1,3 @@
-require 'xmlrpc/client'
-
 command /bug.*status/ do |raw_command|
   args = get_args raw_command
   command = {

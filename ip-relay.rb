@@ -1,5 +1,6 @@
 require "rubygems"
 require "pp"
+require "xmlrpc/client"
 require "bundler/setup"
 Bundler.require
 
@@ -7,7 +8,7 @@ Bundler.require
 # but before lib dependencies so that we can catch application
 # errors in production
 if settings.logging_to_disk
-  log = File.new("log/ip-relay.log", "a")
+  log = File.new(File.expand_path('./log/ip-relay.log', File.dirname(__FILE__)), "a")
   STDOUT.reopen(log)
   STDERR.reopen(log)
 end

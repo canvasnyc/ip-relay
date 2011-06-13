@@ -41,6 +41,10 @@ class Bugzilla
     self.call "Bug.create", args
   end
 
+  def self.search(args)
+    self.call "Bug.search", args
+  end
+
   private
 
   def self.auth_args

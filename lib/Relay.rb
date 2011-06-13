@@ -7,6 +7,7 @@ module Relay
   end
 
   def execute(commands)
+    commands = [commands] if commands.class != Array
     if commands.nil? || commands.empty?
       puts "No commands detected to execute"
     else

@@ -3,7 +3,6 @@ command /chat/ do |raw_command|
   command = {
     :destination => 'Campfire',
     :action => :speak,
-    :actionable => 'chat',
     :args => {
       :room => args[:chat].capitalize,
       :comment => nil,

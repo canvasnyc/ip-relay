@@ -3,7 +3,6 @@ command /bug.*status/ do |raw_command|
   command = {
     :destination => 'Bugzilla',
     :action => :update_bug,
-    :actionable => 'bug',
     :args => {
       :ids => args[:bug],
       :comment => nil,

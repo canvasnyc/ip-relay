@@ -10,9 +10,9 @@ post '/beanstalk/commit' do
       :commit => commit
     }
     command[:args][:comment] =
-      "#{commit["author_full_name"]} made a commit (r#{commit["revision"]}) " +
-      "that mentioned this #{command[:actionable]}.\n\n" +
-      "#{commit["message"]}\n\n#{commit["changeset_url"]}"
+      "#{commit["author_full_name"]} committed r#{commit["revision"]}:\n\n" +
+      "\"#{Beanstalk.shorten_message commit["message"]}\"\n\n" +
+      "#{commit["changeset_url"]}"
   end
   respond execute commands
 end
@@ -31,9 +31,10 @@ post '/beanstalk/payload' do
           :commit => commit
         }
         command[:args][:comment] =
-          "#{commit["author"]["name"]} made a commit (#{commit['id'][0..7]}) " +
-          "to #{payload["repository"]["name"]} that mentioned this #{command[:actionable]}.\n\n" +
-          "#{commit["message"]}\n\n#{commit["url"]}"
+          "#{commit["author"]["name"]} committed #{commit['id'][0..7]} " +
+          "to #{payload["repository"]["name"]}:\n\n" +
+          "\"#{Beanstalk.shorten_message commit["message"]}\"\n\n" +
+          "#{commit["url"]}"
       end
     end
   else
@@ -42,4 +43,10 @@ post '/beanstalk/payload' do
     puts "*" * 79
   end
   respond execute commands
+end
+
+module Beanstalk
+  def self.shorten_message(message)
+    message.match(/(.*?)\[/).captures.first.rstrip
+  end
 end

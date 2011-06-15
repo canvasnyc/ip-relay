@@ -3,7 +3,6 @@ command /task/ do |raw_command|
   command = {
     :destination => 'Intervals',
     :action => :add_comment,
-    :actionable => 'task',
     :args => {
       :id => args[:task],
       :comment => nil,

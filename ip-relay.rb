@@ -21,6 +21,7 @@ include Interpreter
 # Origins
 require File.expand_path('./lib/Beanstalk.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/Hoptoad.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/Deployment.rb', File.dirname(__FILE__))
 
 # Destinations
 require File.expand_path('./lib/Bugzilla.rb', File.dirname(__FILE__))

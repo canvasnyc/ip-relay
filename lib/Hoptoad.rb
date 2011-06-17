@@ -44,7 +44,8 @@ class Hoptoad
         :summary => "#{error["error"]["message"]} [Hoptoad ID: #{error["id"]}]",
         :version => 'unspecified',
         :url => error["error"]["url"],
-        :description => error["message"]
+        :description => error["message"],
+        :target_milestone => "---"
       }
     }
     execute command

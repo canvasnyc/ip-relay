@@ -3,6 +3,19 @@
 
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
+set :application, 'iP Relay'
+set :rails_env, 'production'
+
+require 'lib/capistrano-hook'
+IPRelay.config({
+  :url => 'http://foo.com',
+  :basic_auth => true,
+  :username => 'foo',
+  :password => 'bar',
+  :commands => "[chat:shenanigans]",
+  :name => "Todd Mazierski"
+})
+
 default_run_options[:pty] = true
 
 set :user, 'your_username_here'
@@ -35,5 +48,6 @@ namespace :deploy do
 
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
+    IPRelay.notify self
   end
 end

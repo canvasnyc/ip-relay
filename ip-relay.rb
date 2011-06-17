@@ -29,7 +29,7 @@ require File.expand_path('./lib/Campfire.rb', File.dirname(__FILE__))
 
 if settings.basic_auth
   use Rack::Auth::Basic, "iP Relay" do |username, password|
-    [username, password] == settings.basic_auth_credentials
+    settings.basic_auth_credentials.include? [username, password]
   end
 end
 

@@ -1,12 +1,4 @@
-# The following is only known to work on DreamHost. Use as-is,
-# reconfigure, etc.!
-
-load 'deploy' if respond_to?(:namespace) # cap2 differentiator
-
-set :application, 'iP Relay'
-set :rails_env, 'production'
-
-require 'lib/capistrano-hook'
+require File.expand_path('./hooks/cap_deploy_notify.rb', File.dirname(__FILE__))
 IPRelay.config({
   :url => 'http://foo.com',
   :basic_auth => true,
@@ -15,6 +7,14 @@ IPRelay.config({
   :commands => "[chat:shenanigans]",
   :name => "Todd Mazierski"
 })
+
+# The following is only known to work on DreamHost. Use as-is,
+# reconfigure, etc.!
+
+load 'deploy' if respond_to?(:namespace) # cap2 differentiator
+
+set :application, 'iP Relay'
+set :rails_env, 'production'
 
 default_run_options[:pty] = true
 

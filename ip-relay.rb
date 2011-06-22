@@ -13,20 +13,20 @@ if settings.logging_to_disk
   STDERR.reopen(log)
 end
 
-require File.expand_path('./lib/Relay.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/relay.rb', File.dirname(__FILE__))
 include Relay
-require File.expand_path('./lib/Interpreter.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/interpreter.rb', File.dirname(__FILE__))
 include Interpreter
 
 # Origins
-require File.expand_path('./lib/Beanstalk.rb', File.dirname(__FILE__))
-require File.expand_path('./lib/Hoptoad.rb', File.dirname(__FILE__))
-require File.expand_path('./lib/Deployment.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/origins/beanstalk.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/origins/hoptoad.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/origins/deployment.rb', File.dirname(__FILE__))
 
 # Destinations
-require File.expand_path('./lib/Bugzilla.rb', File.dirname(__FILE__))
-require File.expand_path('./lib/Intervals.rb', File.dirname(__FILE__))
-require File.expand_path('./lib/Campfire.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/destinations/bugzilla.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/destinations/intervals.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/destinations/campfire.rb', File.dirname(__FILE__))
 
 if settings.basic_auth
   use Rack::Auth::Basic, "iP Relay" do |username, password|

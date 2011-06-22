@@ -27,6 +27,7 @@ require File.expand_path('./lib/origins/deployment.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/destinations/bugzilla.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/destinations/intervals.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/destinations/campfire.rb', File.dirname(__FILE__))
+require File.expand_path('./lib/destinations/email.rb', File.dirname(__FILE__))
 
 if settings.basic_auth
   use Rack::Auth::Basic, "iP Relay" do |username, password|

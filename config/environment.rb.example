@@ -32,3 +32,13 @@ set :bugzilla, {
   :login => 'your_login_here',
   :password => 'your_password_here',
 }
+
+# SMTP configuration for the Email destination
+set :smtp, {
+  :host => 'your_smtp_host',
+  :port => 25,
+  :username => 'foo@bar.com',
+  :password => 'your_smtp_password',
+  :authentication => :plain, # :plain, :login, :cram_md5, no auth by default
+  :domain => 'foo.bar.com' # the HELO domain provided by the client to the server
+}

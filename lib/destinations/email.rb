@@ -25,7 +25,8 @@ class Email
         :user_name => settings.smtp[:username],
         :password => settings.smtp[:password],
         :authentication => settings.smtp[:authentication],
-        :domain => settings.smtp[:domain]
+        :domain => settings.smtp[:domain],
+        :enable_starttls_auto => false
       }
     )
     return result.inspect

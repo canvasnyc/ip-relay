@@ -16,7 +16,7 @@ class Email
     result = Pony.mail(
       :from => settings.smtp[:username],
       :to => args[:to],
-      :subject => args[:comment].gsub("\n", ""),
+      :subject => args[:comment].split("\n").first,
       :body => args[:comment],
       :via => :smtp,
       :via_options => {

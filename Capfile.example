@@ -5,7 +5,7 @@ IPRelay.config({
   :username => 'foo',
   :password => 'bar',
   :commands => "[chat:shenanigans]",
-  :name => "Todd Mazierski"
+  :name => `git config user.name`.strip
 })
 
 # The following is only known to work on DreamHost. Use as-is,

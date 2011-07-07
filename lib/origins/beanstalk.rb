@@ -23,7 +23,15 @@ post '/beanstalk/payload' do
   puts request.body.read
   payload = JSON.parse params[:payload]
   commands = []
-  unless payload["push_is_too_large"]
+  if payload["push_is_too_large"]
+    puts "*" * 79
+    puts "Push is too large"
+    puts "*" * 79
+  elsif !settings.beanstalk[:branches_monitored].include? payload["branch"]
+    puts "*" * 79
+    puts "Branch #{payload["branch"]} is not monitored"
+    puts "*" * 79
+  else
     payload["commits"].each do |commit|
       commands += interpret(commit["message"]).each do |command|
         command[:origin] = {
@@ -37,10 +45,6 @@ post '/beanstalk/payload' do
           "#{commit["url"]}"
       end
     end
-  else
-    puts "*" * 79
-    puts "Push is too large"
-    puts "*" * 79
   end
   respond execute commands
 end

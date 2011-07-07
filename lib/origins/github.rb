@@ -13,7 +13,7 @@ post '/github/payload' do
       command[:args][:comment] =
         "#{commit["author"]["name"]} committed #{commit['id'][0..6]} " +
         "to #{payload["repository"]["name"]}:\n\n" +
-        "\"#{Beanstalk.shorten_message commit["message"]}\"\n\n" +
+        "\"#{GitHub.shorten_message commit["message"]}\"\n\n" +
         "#{commit["url"][0..-34]}"
     end
   end

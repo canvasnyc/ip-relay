@@ -47,3 +47,8 @@ set :smtp, {
 set :beanstalk, {
   :branches_monitored => ['dev', 'development']
 }
+
+# defines what branches in GitHub Git repositories will be monitored for commands
+set :github, {
+  :branches_monitored => ['dev', 'development']
+}

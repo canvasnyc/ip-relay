@@ -27,6 +27,8 @@ end
 
 class Bugzilla
 
+  MaxSummaryLength = 255
+
   def self.add_comment(args)
     self.call "Bug.add_comment", args
   end

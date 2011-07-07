@@ -22,12 +22,16 @@ end
 
 class Hoptoad
 
+  def self.id(error)
+    " [Hoptoad ID: #{error["id"]}]"
+  end
+
   def self.search(error)
     command = {
       :destination => 'Bugzilla',
       :action => :search,
       :args => {
-        :summary => "[Hoptoad ID: #{error["id"]}]",
+        :summary => self.id(error),
         :limit => 1
       }
     }
@@ -41,7 +45,7 @@ class Hoptoad
       :args => {
         :product => error["error"]["app_name"],
         :component => 'Hoptoad Errors',
-        :summary => "#{error["error"]["message"]} [Hoptoad ID: #{error["id"]}]",
+        :summary => self.summary(error),
         :version => 'unspecified',
         :url => error["error"]["url"],
         :description => error["message"],
@@ -49,6 +53,11 @@ class Hoptoad
       }
     }
     execute command
+  end
+
+  def self.summary(error)
+    max_length = Bugzilla::MaxSummaryLength - self.id(error).length
+    error["error"]["message"][0..(max_length - 1)] + self.id(error)
   end
 
   def self.add_comment(error, id)

@@ -12,7 +12,13 @@ class TestHoptoadIntegration < Test::Unit::TestCase
   end
 
   def test_error
-    error = File.read(File.expand_path('../examples/hoptoad.json', File.dirname(__FILE__)))
+    error = File.read(File.expand_path('../examples/hoptoad/error.json', File.dirname(__FILE__)))
+    post '/hoptoad/error', params = error
+    assert last_response.ok?
+  end
+
+  def test_error_too_long
+    error = File.read(File.expand_path('../examples/hoptoad/error_too_long.json', File.dirname(__FILE__)))
     post '/hoptoad/error', params = error
     assert last_response.ok?
   end

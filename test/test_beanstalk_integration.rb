@@ -11,6 +11,12 @@ class TestBeanstalkIntegration < Test::Unit::TestCase
     Sinatra::Application
   end
 
+  def setup
+    puts "Resetting logged Beanstalk commits..."
+    file = File.join(settings.db_path, 'beanstalk.db')
+    File.delete(file) if File.exists?(file)
+  end
+
   def test_commit_no_bugs
     commit = File.read(File.expand_path('../examples/beanstalk/commit_no_bugs.json', File.dirname(__FILE__)))
     post '/beanstalk/commit', params = {:commit => commit}
@@ -87,6 +93,14 @@ class TestBeanstalkIntegration < Test::Unit::TestCase
     payload = File.read(File.expand_path('../examples/beanstalk/payload_too_large.json', File.dirname(__FILE__)))
     post '/beanstalk/payload', params = {:payload => payload}
     assert last_response.ok?
+  end
+
+  def test_payload_1_bug_repeated
+    payload = File.read(File.expand_path('../examples/beanstalk/payload_1_bug.json', File.dirname(__FILE__)))
+    2.times {
+      post '/beanstalk/payload', params = {:payload => payload}
+      assert last_response.ok?
+    }
   end
 
 end

@@ -11,7 +11,7 @@ post '/beanstalk/commit' do
     }
     command[:args][:comment] =
       "#{commit["author_full_name"]} committed r#{commit["revision"]}:\n\n" +
-      "\"#{Beanstalk.shorten_message commit["message"]}\"\n\n" +
+      "\"#{SCM.strip_commands commit["message"]}\"\n\n" +
       "#{commit["changeset_url"]}"
   end
   respond execute commands
@@ -28,25 +28,22 @@ post '/beanstalk/payload' do
     puts "Push is too large"
     puts "*" * 79
   else
+    scm = SCM.new 'beanstalk'
     payload["commits"].each do |commit|
-      commands += interpret(commit["message"]).each do |command|
-        command[:origin] = {
-          :name => "Beanstalk",
-          :commit => commit
-        }
-        command[:args][:comment] =
-          "#{commit["author"]["name"]} committed #{commit['id'][0..7]} " +
-          "to #{payload["repository"]["name"]}:\n\n" +
-          "\"#{Beanstalk.shorten_message commit["message"]}\"\n\n" +
-          "#{commit["url"]}"
+      unless scm.is_logged? commit
+        commands += interpret(commit["message"]).each do |command|
+          command[:origin] = {
+            :name => "Beanstalk",
+            :commit => commit
+          }
+          command[:args][:comment] =
+            "#{commit["author"]["name"]} committed #{commit['id'][0..7]} " +
+            "to #{payload["repository"]["name"]}:\n\n" +
+            "\"#{SCM.strip_commands commit["message"]}\"\n\n" +
+            "#{commit["url"]}"
+        end
       end
     end
   end
   respond execute commands
-end
-
-module Beanstalk
-  def self.shorten_message(message)
-    message.match(/(.*?)\[/).captures.first.rstrip
-  end
 end

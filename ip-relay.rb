@@ -13,12 +13,14 @@ if settings.logging_to_disk
   STDERR.reopen(log)
 end
 
+# Core functions
 require File.expand_path('./lib/relay.rb', File.dirname(__FILE__))
 include Relay
 require File.expand_path('./lib/interpreter.rb', File.dirname(__FILE__))
 include Interpreter
 
 # Origins
+require File.expand_path('./lib/origins/shared/scm.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/origins/beanstalk.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/origins/hoptoad.rb', File.dirname(__FILE__))
 require File.expand_path('./lib/origins/deployment.rb', File.dirname(__FILE__))

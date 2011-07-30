@@ -27,10 +27,6 @@ post '/beanstalk/payload' do
     puts "*" * 79
     puts "Push is too large"
     puts "*" * 79
-  elsif !settings.beanstalk[:branches_monitored].include? payload["branch"]
-    puts "*" * 79
-    puts "Branch #{payload["branch"]} is not monitored"
-    puts "*" * 79
   else
     payload["commits"].each do |commit|
       commands += interpret(commit["message"]).each do |command|

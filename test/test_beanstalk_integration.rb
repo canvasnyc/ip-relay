@@ -89,10 +89,4 @@ class TestBeanstalkIntegration < Test::Unit::TestCase
     assert last_response.ok?
   end
 
-  def test_payload_1_bug_not_monitored
-    payload = File.read(File.expand_path('../examples/beanstalk/payload_1_bug_not_monitored.json', File.dirname(__FILE__)))
-    post '/beanstalk/payload', params = {:payload => payload}
-    assert last_response.ok?
-  end
-
 end

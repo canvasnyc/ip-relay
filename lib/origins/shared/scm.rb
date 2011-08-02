@@ -1,7 +1,7 @@
 class SCM
 
   def self.strip_commands(message)
-    message.match(/(.*?)\[/).captures.first.rstrip
+    message.gsub(/\[(.*?)\]/, '').rstrip
   end
 
   def initialize(name)

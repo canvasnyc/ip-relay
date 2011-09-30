@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/ip_relay"]
+	path = vendor/plugins/ip_relay
+	url = git@github.com:toddmazierski/ip-relay-plugin.git

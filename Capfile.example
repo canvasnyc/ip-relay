@@ -1,11 +1,9 @@
-require File.expand_path('./hooks/cap_deploy_notify.rb', File.dirname(__FILE__))
-IPRelay.config({
+require File.expand_path('./vendor/plugins/ip_relay/ip_relay.rb', File.dirname(__FILE__))
+ip_relay = IPRelay::Deployment.new({
   :url => 'http://foo.com',
   :basic_auth => true,
   :username => 'foo',
-  :password => 'bar',
-  :commands => "[chat:shenanigans]",
-  :name => `git config user.name`.strip
+  :password => 'bar'
 })
 
 # The following is only known to work on DreamHost. Use as-is,
@@ -48,6 +46,13 @@ namespace :deploy do
 
   task :restart do
     run "touch #{current_path}/tmp/restart.txt"
-    IPRelay.notify self
+    ip_relay.notification({
+      :application => application,
+      :environment => rails_env,
+      :branch => revision,
+      :commit => real_revision,
+      :commands => '[chat:shenanigans]',
+      :name => `git config user.name`.strip
+    })
   end
 end

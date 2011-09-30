@@ -3,7 +3,6 @@
     "site": "Google",
     "environment": "production",
     "url": "http://www.google.com",
-    "error": "not_200",
     "message": "Expected response code 200, received 500",
     "commands": "[chat:shenanigans]"
-}
+}z

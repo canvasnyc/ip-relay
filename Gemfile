@@ -1,5 +1,7 @@
 source :rubygems
 
+gem 'rack', '1.3.4'
+
 gem 'sinatra'
 gem 'sinatra-config', :require => 'sinatra/config'
 gem 'tinder'

@@ -13,7 +13,7 @@ post '/downtime' do
         :alert => alert
       }
       command[:args][:comment] =
-        "#{alert['site']} #{alert['environment']} at #{alert['url']} is down: #{alert['message']}"
+        "#{alert['site']} #{alert['environment']['name']} at #{alert['environment']['url']} failed checkup: #{alert['url']}"
     end
   end
   respond execute commands
@@ -37,8 +37,8 @@ class Downtime
       false
     else
       puts "*" * 79
-      puts "Ignoring alert: #{alert["id"]} #{alert["environment"]}"
-      puts "Was already processed on: #{result.first[2]}"
+      puts "Ignoring alert for environment id ##{alert['environment']['id']}"
+      puts "Was already processed on: #{result.first[1]}"
       puts "*" * 79
       true
     end
@@ -56,14 +56,14 @@ class Downtime
 
   def db_create
     db_open
-    @db.execute "CREATE TABLE `alerts` (`id` TEXT, `environment` TEXT, `logged_at` TEXT)"
+    @db.execute "CREATE TABLE `alerts` (`environment_id` INTEGER, `logged_at` TEXT)"
   end
 
   def log(alert)
-    @db.execute "INSERT INTO `alerts` VALUES (\"#{alert["id"]}\", \"#{alert["environment"]}\", DATETIME('NOW'))"
+    @db.execute "INSERT INTO `alerts` VALUES (\"#{alert['environment']['id']}\", DATETIME('NOW'))"
   end
 
   def find(alert)
-    @db.execute "SELECT * FROM `alerts` WHERE `id`=\"#{alert["id"]}\" AND `environment`=\"#{alert["environment"]}\" AND `logged_at` >= DATETIME('NOW', '#{lookback}') LIMIT 1"
+    @db.execute "SELECT * FROM `alerts` WHERE `environment_id`=\"#{alert['environment']['id']}\" AND `logged_at` >= DATETIME('NOW', '#{lookback}') LIMIT 1"
   end
 end
